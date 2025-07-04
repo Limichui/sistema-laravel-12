@@ -62,3 +62,35 @@ Route::get('/dd', function () {
 Route::get('/config', function () {
     return config('app.timezone'); // Devuelve el nombre de la aplicación configurado en config/app.php
 });
+
+Route::get('/producto', function () {
+    //return view('almacen.producto',['nombre'=>'Impresora LX300', 'marca'=>'EDSON']); // Retorna la vista producto con datos
+    //return view('almacen.producto')->with(['nombre' => 'Impresora LX300', 'marca' => 'EDSON']); // Retorna la vista producto con datos
+    $nombre= 'Impresora LX300';
+    $marca = 'EDSON 1';
+    return view('almacen.producto', compact('nombre', 'marca')); // Retorna la vista producto con datos usando compact
+});
+
+//Estructuras de control
+Route::get('/condicional/{nota}', function ($nota) {
+    return view('estructuras.condicional', compact('nota')); // Retorna la vista condicional con la nota
+});
+
+Route::get('/switch/{numero}', function ($numero) {
+    return view('estructuras.switch', compact('numero')); // Retorna la vista switch con el número
+});
+
+//Bucles
+Route::get('/while/{numero}', function ($numero) {
+    return view('estructuras.while', compact('numero')); // Retorna la vista while con el número
+});
+
+Route::get('/foreach', function () {
+    $lista=[
+        'Limbert Olmos',
+        'Juan Perez',
+        'Maria Lopez',
+        'Carlos Sanchez'
+    ];
+    return view('estructuras.foreach', compact('lista')); // Retorna la vista foreach con la lista
+});
