@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function entradas()
+    {
+        return $this->hasMany(Entrada::class, 'user_id'); // Relación uno a muchos con Entrada
+    }
 }
