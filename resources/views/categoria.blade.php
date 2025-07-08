@@ -6,8 +6,8 @@
 @endpush
 
 @section('contenido')
-    <h2 class="texto-rojo">Categorías</h2>
-    <p>Este es el contenido de las categorias</p>
+    <h2 class="texto-rojo">@lang('main.categories')</h2>
+    <p>Este es el contenido de @lang('main.categories')</p>
 @endsection
 
 @push('scripts')
