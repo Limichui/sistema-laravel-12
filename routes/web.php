@@ -94,3 +94,11 @@ Route::get('/foreach', function () {
     ];
     return view('estructuras.foreach', compact('lista')); // Retorna la vista foreach con la lista
 });
+
+Route::get('contacto', function () {
+    return view('contacto'); // Retorna la vista contacto
+});
+
+Route::get('categoria', function () {
+    return view('categoria'); // Retorna la vista categoria
+});
