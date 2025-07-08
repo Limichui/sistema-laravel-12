@@ -19,6 +19,7 @@ class EntradasTableSeeder extends Seeder
         // Aquí se crean dos entradas de ejemplo
         // Asegúrate de que el modelo Entrada esté correctamente configurado y la migración
         // correspondiente haya sido ejecutada antes de correr este seeder. 
+        /*
         Entrada::create([
             'user_id' => 1, // ID del usuario que crea la entrada
             'titulo' => 'Primer Título',
@@ -33,5 +34,13 @@ class EntradasTableSeeder extends Seeder
             'tag' => 'Etiqueta2',
             'contenido' => 'Este es el contenido del primer registro.',
         ]);
-    }
+        */
+        Entrada::factory()->count(100)->create(); // Crea 100 entradas usando el factory
+        // Puedes ajustar el número de entradas según tus necesidades
+        // Si tienes un factory configurado para el modelo Entrada, puedes usarlo para generar datos
+        // de prueba automáticamente.
+        // Si no tienes un factory, puedes crear entradas manualmente como se muestra arriba.
+        // Asegúrate de que el modelo Entrada esté correctamente configurado y la migración
+        // correspondiente haya sido ejecutada antes de correr este seeder. 
+    } 
 }
