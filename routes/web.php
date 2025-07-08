@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () {
     return view('welcome');
@@ -101,4 +102,13 @@ Route::get('contacto', function () {
 
 Route::get('categoria', function () {
     return view('categoria'); // Retorna la vista categoria
+});
+
+rOUTE::GET('probar-conexion', function () {
+    try {
+        DB::connection()->getPdo();
+        return 'Conexión exitosa a la base de datos';
+    } catch (\Exception $e) {
+        return 'Error al conectar a la base de datos: ' . $e->getMessage();
+    }
 });
