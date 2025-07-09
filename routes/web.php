@@ -104,11 +104,77 @@ Route::get('categoria', function () {
     return view('categoria'); // Retorna la vista categoria
 });
 
-rOUTE::GET('probar-conexion', function () {
+Route::get('probar-conexion', function () {
     try {
         DB::connection()->getPdo();
         return 'Conexión exitosa a la base de datos';
     } catch (\Exception $e) {
         return 'Error al conectar a la base de datos: ' . $e->getMessage();
     }
+});
+
+// Query Builder
+// Obtiene todos los usuarios de la tabla 'users'
+Route::get('query', function () {
+    $entradas = DB::table('entradas')->get(); 
+    return $entradas; // Retorna los datos obtenidos de la tabla 'entradas' en formato JSON 
+});
+
+// Obtiene la primera entrada de la tabla 'entradas'
+Route::get('find', function () {
+    $entradas = DB::table('entradas')->first(); 
+    return $entradas; // Retorna los datos obtenidos de la tabla 'entradas' en formato JSON 
+});
+
+// Obtiene una entrada específica por su ID
+Route::get('filtro', function () {
+    $entrada = DB::table('entradas')
+                ->where('user_id', 1) // Filtra las entradas por user_id igual a 1
+                ->where('titulo', 'like', 'a%') // Filtra las entradas por título que comienza con 'a'
+                ->orWhere('titulo', 'like', 't%') // O filtra las entradas por título que comienza con 'b'
+                ->get(); // Obtiene las entradas filtradas
+    return $entrada; // Retorna los datos de la entrada específica en formato JSON
+});
+
+//whereNull()
+//whereNotNull()
+//whereIn()
+//whereNotIn()
+//whereBetween
+//whereNotBetween
+
+//JOINS con query builder
+
+Route::get('join', function(){
+    $entradas= DB::table('entradas') // Selecciona la tabla 'entradas'
+        ->join('users','entradas.user_id','=','users.id') // Realiza un join con la tabla 'users' donde 'entradas.user_id' es igual a 'users.id'
+        ->select('entradas.id','entradas.titulo','entradas.tag', 'entradas.imagen', 'users.email') //
+        ->get();
+    return $entradas;    
+});
+
+//leftJoin()
+//rightJoin()
+//joinWhere()
+
+// Inserción de un solo registro
+Route::get('/insertar', function() {
+    $insertado = DB::table('users') // Inserta un nuevo registro en la tabla 'users'
+        ->insert([ // Define los datos a insertar
+            "name" => "Juan Pérez",
+            "email" => "juan@prueba.com",
+            "password" => "juan"
+        ]);
+    return $insertado;
+});
+
+// Inserción de registros y obtención del ID del último registro insertado
+Route::get('/getId', function() {
+    $id = DB::table('users') // Inserta un nuevo registro en la tabla 'users' y obtiene el ID del registro insertado
+        ->insertGetId([ // Define los datos a insertar
+            "name" => "Juan Pérez",
+            "email" => "juan2@prueba.com",
+            "password" => "juan2"
+        ]);
+    return $id;
 });
