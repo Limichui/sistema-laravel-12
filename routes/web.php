@@ -192,3 +192,8 @@ Route::get('/respuesta', function() {
 Route::get('/respuesta2', function() {
     return response('Hola, esta es una respuesta', 404); // Retorna una respuesta con el contenido 'Hola, esta es una respuesta' y un código de estado 200
 });
+
+Route::get('/app', function() {
+    //return view('plantilla.app'); // Retorna la vista 'app' de la plantilla
+    return view('usuario.index'); // Retorna la vista 'index' de usuario
+});
