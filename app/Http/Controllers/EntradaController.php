@@ -31,6 +31,26 @@ class EntradaController extends Controller
      */
     public function store(Request $request)
     {
+        // Validación de los datos recibidos
+        $request->validate([
+            'titulo' => 'required|string|max:50',
+            'tag' => 'required|string|max:20',
+            'contenido' => 'required|string',
+        ],
+        [
+            'titulo.required' => 'El título es obligatorio',
+            'titulo.string' => 'El título debe ser una cadena de texto',
+            'titulo.max' => 'El título no puede exceder los 50 caracteres',
+
+            'tag.required' => 'El tag es obligatorio',
+            'tag.string' => 'El tag debe ser una cadena de texto',
+            'tag.max' => 'El tag no puede exceder los 20 caracteres',
+
+            'contenido.required' => 'El contenido es obligatorio',
+            'contenido.string' => 'El contenido debe ser una cadena de texto',
+        ]
+    );
+
         $entrada = new Entrada();
         $entrada->titulo = $request->input('titulo');
         $entrada->tag = $request->input('tag'); 
