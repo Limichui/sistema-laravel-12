@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Entrada;
 use Illuminate\Http\Request;
+use App\Http\Requests\EntradaRequest; // Importa la clase de solicitud personalizada
+
 
 class EntradaController extends Controller
 {
@@ -29,27 +31,33 @@ class EntradaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(EntradaRequest $request)
     {
+        /*
         // Validación de los datos recibidos
         $request->validate([
-            'titulo' => 'required|string|max:50',
-            'tag' => 'required|string|max:20',
-            'contenido' => 'required|string',
-        ],
-        [
-            'titulo.required' => 'El título es obligatorio',
-            'titulo.string' => 'El título debe ser una cadena de texto',
-            'titulo.max' => 'El título no puede exceder los 50 caracteres',
+                'titulo' => 'required|string|min:5|max:50',
+                'tag' => 'required|string|min:3|max:20',
+                'contenido' => 'required|string|min:5|max:255',
+            ],
+            [
+                'titulo.required' => 'El título es obligatorio',
+                'titulo.string' => 'El título debe ser una cadena de texto',
+                'titulo.max' => 'El título no puede exceder los 50 caracteres',
+                'titulo.min' => 'El título debe tener al menos 5 caracteres',
 
-            'tag.required' => 'El tag es obligatorio',
-            'tag.string' => 'El tag debe ser una cadena de texto',
-            'tag.max' => 'El tag no puede exceder los 20 caracteres',
+                'tag.required' => 'El tag es obligatorio',
+                'tag.string' => 'El tag debe ser una cadena de texto',
+                'tag.max' => 'El tag no puede exceder los 20 caracteres',
+                'tag.min' => 'El tag debe tener al menos 3 caracteres',
 
-            'contenido.required' => 'El contenido es obligatorio',
-            'contenido.string' => 'El contenido debe ser una cadena de texto',
-        ]
-    );
+                'contenido.required' => 'El contenido es obligatorio',
+                'contenido.string' => 'El contenido debe ser una cadena de texto',
+                'contenido.max' => 'El contenido no puede exceder los 255 caracteres',
+                'contenido.min' => 'El contenido debe tener al menos 5 caracteres',
+            ]
+        );
+        */
 
         $entrada = new Entrada();
         $entrada->titulo = $request->input('titulo');
