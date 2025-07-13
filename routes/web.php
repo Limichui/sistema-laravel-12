@@ -182,13 +182,13 @@ Route::get('/getId', function() {
 
 // Rutas con cotroladores
 //Route::get('/entrada', [EntradaController::class, 'index']); // Define una ruta que utiliza el método 'index' del controlador 'EntradaController'
-//Route::resource('entrada', EntradaController::class)->only('index', 'show'); // Define un recurso para el controlador 'EntradaController' con solo los métodos 'index' y 'show'
-Route::resource('entrada', EntradaController::class)->except('destroy', 'update'); // Define un recurso completo para el controlador 'EntradaController' excepto los métodos 'destroy' y 'update'
+//Route::resource('/entrada', EntradaController::class)->only('index', 'show'); // Define un recurso para el controlador 'EntradaController' con solo los métodos 'index' y 'show'
+Route::resource('/entrada', EntradaController::class)->except('destroy', 'update'); // Define un recurso completo para el controlador 'EntradaController' excepto los métodos 'destroy' y 'update'
 
-Route::get('respuesta', function() {
+Route::get('/respuesta', function() {
     return response('Hola, esta es una respuesta', 200); // Retorna una respuesta con el contenido 'Hola, esta es una respuesta' y un código de estado 200
 });
 
-Route::get('respuesta2', function() {
+Route::get('/respuesta2', function() {
     return response('Hola, esta es una respuesta', 404); // Retorna una respuesta con el contenido 'Hola, esta es una respuesta' y un código de estado 200
 });
