@@ -197,3 +197,7 @@ Route::get('/app', function() {
     //return view('plantilla.app'); // Retorna la vista 'app' de la plantilla
     return view('usuario.index'); // Retorna la vista 'index' de usuario
 });
+
+Route::get('/action', function() {
+    return view('usuario.action'); // Retorna la vista 'action' de usuario
+});
