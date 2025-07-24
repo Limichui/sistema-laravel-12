@@ -12,9 +12,9 @@
                 <!-- /.card-header -->
                 <div class="card-body">
                     <div>
-                        <form action="" method="GET">
+                        <form action="{{route('usuarios.index')}}" method="GET">
                             <div class="input-group">
-                                <input type="text" name="texto" class="form-control" value="" placeholder="Ingrese el texto a buscar">
+                                <input type="text" name="buscar" class="form-control" value="" placeholder="Ingrese el texto a buscar">
                                 <div class="input-group-append ms-1">
                                     <button type="submit" class="btn btn-secondary">
                                         <i class="fas fa-search"></i>Buscar
@@ -33,23 +33,34 @@
                                     <th style="width: 20px">ID</th>
                                     <th>Nombre</th>
                                     <th>Email</th>
+                                    <th>Activo</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="align-middle">
-                                    <td>
-                                        <a href="#" class="btn btn-warning btn-sm">
-                                            <i class="bi bi-pencil-fill"></i>
-                                        </a>
-                                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-eliminar-01">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </button>
-                                    </td>
-                                    <td>01</td>
-                                    <td>Limbert Olmos Mercado</td>
-                                    <td>limichui.developer@gmail.com</td>
-                                </tr>
-                                @include('usuario.delete')
+                                @if($registros->isEmpty())
+                                    <tr class="align-middle">
+                                        <td colspan="5">No se encontró registros que coincidan con la busqueda</td>
+                                    </tr>
+                                @else
+                                    @foreach($registros as $registro)
+                                        <tr class="align-middle">
+                                            <td>
+                                                <a href="#" class="btn btn-warning btn-sm">
+                                                    <i class="bi bi-pencil-fill"></i>
+                                                </a>
+                                                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-eliminar-01">
+                                                    <i class="bi bi-trash-fill"></i>
+                                                </button>
+                                            </td>
+                                            <td>{{ $registro->id }}</td>
+                                            <td>{{ $registro->name }}</td>
+                                            <td>{{ $registro->email }}</td>
+                                            <td>{{ $registro->activo }}</td>
+                                        </tr>
+                                        @include('usuario.delete')
+                                    @endforeach
+                                @endif  
+                                
                             </tbody>
                         </table>
                     </div>
@@ -57,13 +68,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
-                    <ul class="pagination pagination-sm m-0 float-end">
-                        <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                    </ul>
+                    {{ $registros->appends(["buscar"=>$buscar]) }} 
                 </div>
             </div>
             <!-- /.card -->

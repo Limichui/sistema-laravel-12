@@ -65,7 +65,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="" class="nav-link" id="itemUsuario">
+                            <a href="{{route('usuarios.index')}}" class="nav-link" id="itemUsuario">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Usuario</p>
                             </a>
