@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+Use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -16,7 +17,7 @@ class UserController extends Controller
         $registros = User::where('name', 'like', "%{$buscar}%")
             ->orWhere('email', 'like', "%{$buscar}%")
             ->orWhere('id', 'desc')
-            ->paginate(1);
+            ->paginate(10);
         return view('usuario.index', compact('registros', 'buscar'));
     }
 
@@ -25,15 +26,22 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('usuario.action');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        //dd($request->all()); // Esto detiene la ejecución y muestra los datos recibidos
+        $registro= new User();
+        $registro->name = $request->input('name');
+        $registro->email = $request->input('email');
+        $registro->password = bcrypt($request->input('password'));
+        $registro->activo = $request->input('activo'); // Default to 1 if not provided
+        $registro->save();
+        return redirect()->route('usuarios.index')->with('mensaje', 'Registro del usuario ' . $registro->name . ' creado exitosamente');
     }
 
     /**

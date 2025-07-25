@@ -19,12 +19,19 @@
                                     <button type="submit" class="btn btn-secondary">
                                         <i class="fas fa-search"></i>Buscar
                                     </button>
-                                    <a href="" class="btn btn-primary"> Nuevo</a>
+                                    <a href="{{route('usuarios.create')}}" class="btn btn-primary"> Nuevo</a>
                                 </div>
                             </div>
                         </form>
-
                     </div>
+
+                    @if(Session::has('mensaje'))
+                        <div class="alert alert-info alert-dismissible fade show mt-2">
+                            {{ Session::get('mensaje') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="close"></button>
+                        </div>
+                    @endsession
+
                     <div class="table-responsive mt-3">
                         <table class="table table-bordered">
                             <thead>
