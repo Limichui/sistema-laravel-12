@@ -77,15 +77,18 @@ class UserController extends Controller
         }
 
         $registro->save();
-        
+
         return redirect()->route('usuarios.index')->with('mensaje', 'Registro del usuario ' . $registro->name . ' actualizado exitosamente.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        //
+        $registro = User::findOrFail($id);
+        $registro->delete();
+        
+        return redirect()->route('usuarios.index')->with('mensaje', 'Registro del usuario ' . $registro->name . ' eliminado exitosamente.');
     }
 }

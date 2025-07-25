@@ -55,7 +55,7 @@
                                                 <a href="{{route('usuarios.edit', $registro->id)}}" class="btn btn-warning btn-sm">
                                                     <i class="bi bi-pencil-fill"></i>
                                                 </a>
-                                                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-eliminar-01">
+                                                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-eliminar-{{$registro->id}}">
                                                     <i class="bi bi-trash-fill"></i>
                                                 </button>
                                             </td>
