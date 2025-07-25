@@ -52,7 +52,7 @@
                                     @foreach($registros as $registro)
                                         <tr class="align-middle">
                                             <td>
-                                                <a href="#" class="btn btn-warning btn-sm">
+                                                <a href="{{route('usuarios.edit', $registro->id)}}" class="btn btn-warning btn-sm">
                                                     <i class="bi bi-pencil-fill"></i>
                                                 </a>
                                                 <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-eliminar-01">
@@ -62,7 +62,7 @@
                                             <td>{{ $registro->id }}</td>
                                             <td>{{ $registro->name }}</td>
                                             <td>{{ $registro->email }}</td>
-                                            <td>{{ $registro->activo }}</td>
+                                            <td>{{ $registro->activo == 1 ? 'Activo' : 'Inactivo' }}</td>
                                         </tr>
                                         @include('usuario.delete')
                                     @endforeach

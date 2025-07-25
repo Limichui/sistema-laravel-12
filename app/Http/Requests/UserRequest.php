@@ -21,12 +21,21 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'name' => 'required|string|min:8|max:255',
-            'email' => 'required|email|unique:users,email,' . $this->route('usuario'), // Assuming 'usuario' is the route name for the user resource
-            'password' => 'required|string|min:8|max:255',
-            'activo' => 'required|boolean', // Assuming 'activo' is a boolean field
+        $rules = [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $this->route('usuario'), // o $this->id
+            'activo' => 'required|boolean',
         ];
+
+        if ($this->isMethod('post')) {
+            // Crear: password obligatorio
+            $rules['password'] = 'required|string|min:6';
+        } else {
+            // Editar: password opcional
+            $rules['password'] = 'nullable|string|min:6';
+        }
+
+        return $rules;
     }
 
     public function messages(): array

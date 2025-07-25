@@ -25,19 +25,22 @@
                     --}}
 
                     {{-- Formulario de creación de usuario --}}
-                    <form action="{{route('usuarios.store')}}" method="POST">
+                    <form action="{{ isset($registro) ? route('usuarios.update', $registro->id) : route('usuarios.store')}}" method="POST">
                         @csrf
+                        @if(isset($registro))
+                            @method('PUT')
+                        @endif
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="name" class="form-label">Nombre</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"  value="{{old('name')}}" required>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"  value="{{ old('name', $registro->name ??'') }}" required>
                                 @error('name')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email"  value="{{old('email')}}" required>
+                                <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email"  value="{{ old('email', $registro->email ??'') }}" required>
                                 @error('email')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -46,7 +49,7 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="text" class="form-control @error('password') is-invalid @enderror" id="password" name="password"  value="{{old('password')}}" required>
+                                <input type="text" class="form-control @error('password') is-invalid @enderror" id="password" name="password"  value="{{ old('password') }}">
                                 @error('password')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -54,8 +57,8 @@
                             <div class="col-md-6 mb-3">
                                 <label for="activo" class="form-label">Estado</label>
                                 <select class="form-select @error('activo') is-invalid @enderror" name="activo" id="activo" required>
-                                    <option value="1">Activo</option>
-                                    <option value="0">Inactivo</option>
+                                    <option value="1" {{ old('activo', $registro->activo ?? '1') == '1' ? 'selected' : '' }}>Activo</option>
+                                    <option value="0" {{ old('activo', $registro->activo ?? '1') == '0' ? 'selected' : '' }}>Inactivo</option>
                                 </select>
                                 @error('activo')
                                     <small class="text-danger">{{ $message }}</small>
