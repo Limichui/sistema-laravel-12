@@ -88,7 +88,14 @@ class UserController extends Controller
     {
         $registro = User::findOrFail($id);
         $registro->delete();
-        
+
         return redirect()->route('usuarios.index')->with('mensaje', 'Registro del usuario ' . $registro->name . ' eliminado exitosamente.');
+    }
+
+    public function toggleStatus(User $usuario)
+    {
+        $usuario->activo=!$usuario->activo; // Cambia el estado de activo a inactivo o viceversa
+        $usuario->save();
+        return redirect()->route('usuarios.index')->with('mensaje', 'Estado del usuario ' . $usuario->name . ' actualizado exitosamente.');
     }
 }

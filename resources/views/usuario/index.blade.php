@@ -36,7 +36,7 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th style="width: 100px">Opciones</th>
+                                    <th style="width: 150px">Opciones</th>
                                     <th style="width: 20px">ID</th>
                                     <th>Nombre</th>
                                     <th>Email</th>
@@ -52,19 +52,27 @@
                                     @foreach($registros as $registro)
                                         <tr class="align-middle">
                                             <td>
-                                                <a href="{{route('usuarios.edit', $registro->id)}}" class="btn btn-warning btn-sm">
+                                                <a href="{{route('usuarios.edit', $registro->id)}}" class="btn btn-info btn-sm">
                                                     <i class="bi bi-pencil-fill"></i>
                                                 </a>
                                                 <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-eliminar-{{$registro->id}}">
                                                     <i class="bi bi-trash-fill"></i>
                                                 </button>
+                                                <button class="btn {{ $registro->activo ? 'btn-warning' : 'btn-success' }} btn-sm" data-bs-toggle="modal" data-bs-target="#modal-toggle-{{ $registro->id }}">
+                                                    <i class="bi {{ $registro->activo ? 'bi-ban' : 'bi-check-circle' }}"></i>
+                                                </button>
                                             </td>
                                             <td>{{ $registro->id }}</td>
                                             <td>{{ $registro->name }}</td>
                                             <td>{{ $registro->email }}</td>
-                                            <td>{{ $registro->activo == 1 ? 'Activo' : 'Inactivo' }}</td>
+                                            <td>
+                                                <span class="badge {{ $registro->activo ? 'bg-success' : 'bg-danger' }}">
+                                                    {{ $registro->activo ? 'Activo' : 'Inactivo' }}
+                                                </span>
+                                            </td>
                                         </tr>
                                         @include('usuario.delete')
+                                        @include('usuario.active')
                                     @endforeach
                                 @endif  
                                 
